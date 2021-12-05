@@ -14,7 +14,7 @@ public final class AdminPanel extends JavaPlugin {
     @Override
     public void onEnable() {
         if (!setupEconomy() ) {
-            System.out.println("");
+            
             getServer().getPluginManager().disablePlugin(this);
             return;
         }

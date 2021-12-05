@@ -44,9 +44,14 @@ public class PlayerControl implements Listener {
                         break;
                     }
                     case ENDER_PEARL:{
-
                         String plName = ChatColor.stripColor(pl.getDisplayName());
                         pl.performCommand("tp " + selectedName + " " + plName);
+                        break;
+                    }
+                    case SKELETON_SKULL: {
+                        Player selected = pl.getServer().getPlayer(selectedName);
+                        selected.setHealth(0);
+                        selected.sendMessage(ChatColor.RED + "Вы были убиты Администратором!");
                         break;
                     }
                     case COMPASS: {

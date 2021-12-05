@@ -14,10 +14,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.UUID;
-import java.util.stream.Collectors;
-
 
 public class utils {
     public static Economy economy = AdminPanel.getEconomy();
@@ -30,8 +27,6 @@ public class utils {
         OfflinePlayer offlinePlayer = pl.getServer().getOfflinePlayer(uuid);
 
         Inventory PlayerListInv = Bukkit.createInventory(pl, 54, ChatColor.GREEN + "Список игроков");
-
-
 
         ArrayList<Player> playerList = new ArrayList<>(pl.getServer().getOnlinePlayers());
 

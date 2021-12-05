@@ -50,6 +50,9 @@ public class openMenu implements CommandExecutor {
                 pl.sendMessage(ChatColor.RED + "У вас недостаточно прав для выполнения данной команды.");
             }
         }
+        else{
+            System.out.println(ChatColor.RED + "Эта команда должна выполнятся игроком!");
+        }
 
         return true;
     }
