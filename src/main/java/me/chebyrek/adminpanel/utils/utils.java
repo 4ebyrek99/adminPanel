@@ -44,8 +44,9 @@ public class utils {
             skull.setDisplayName(offlinePlayer.getName());
             ArrayList<String> lore = new ArrayList<>();
             lore.add("Здоровье: " + ChatColor.GREEN + Math.round(playerList.get(i).getHealth()));
-            lore.add("Уровень: " + ChatColor.GREEN + Math.round(playerList.get(i).getExp()));
+            lore.add("Уровень: " + ChatColor.GREEN + Math.round(playerList.get(i).getLevel()));
             lore.add("Баланс: " + ChatColor.GREEN + economy.getBalance(playerList.get(i)));
+            lore.add("Пинг: " + ChatColor.GREEN + playerList.get(i).getPing());
             skull.setLore(lore);
             head.setItemMeta(skull);
 
