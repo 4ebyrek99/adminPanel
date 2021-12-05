@@ -12,7 +12,7 @@ public class PlayerControl implements Listener {
 
     @EventHandler
     public void onClickMenu(InventoryClickEvent e){
-        if (e.getView().getTitle().equalsIgnoreCase(ChatColor.RED + "Список игроков")) {
+        if (e.getView().getTitle().equalsIgnoreCase(ChatColor.GREEN + "Список игроков")) {
             e.setCancelled(true);
             if(e.getCurrentItem() != null) {
                 Player pl = (Player) e.getWhoClicked();
