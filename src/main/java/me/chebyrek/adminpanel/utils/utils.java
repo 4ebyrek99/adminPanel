@@ -1,5 +1,6 @@
 package me.chebyrek.adminpanel.utils;
 
+import jdk.tools.jlink.plugin.Plugin;
 import me.chebyrek.adminpanel.AdminPanel;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
@@ -13,7 +14,9 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 
 public class utils {
@@ -22,30 +25,35 @@ public class utils {
     public static void openPlayerList(Player pl){
         pl.closeInventory();
 
+        String name = pl.getName();
+        UUID uuid = pl.getUniqueId();
+        OfflinePlayer offlinePlayer = pl.getServer().getOfflinePlayer(uuid);
+        System.out.println(uuid);
         Inventory PlayerListInv = Bukkit.createInventory(pl, 54, ChatColor.GREEN + "Список игроков");
+
+
 
         ArrayList<Player> playerList = new ArrayList<>(pl.getServer().getOnlinePlayers());
 
         for(int i = 0; i < playerList.size(); i++) {
 
-            String name = ChatColor.stripColor(playerList.get(i).getDisplayName());
+            ItemStack head = new ItemStack(Material.PLAYER_HEAD, 1);
+            SkullMeta skull = (SkullMeta) head.getItemMeta();
 
-            ItemStack playerHead = new ItemStack(Material.PLAYER_HEAD, 1);
-            ItemMeta meta = playerHead.getItemMeta();
-
-            meta.setDisplayName(name);
+            skull.setOwningPlayer(offlinePlayer);
+            skull.setDisplayName(offlinePlayer.getName());
             ArrayList<String> lore = new ArrayList<>();
             lore.add("Здоровье: " + ChatColor.GREEN + Math.round(playerList.get(i).getHealth()));
             lore.add("Уровень: " + ChatColor.GREEN + Math.round(playerList.get(i).getExp()));
             lore.add("Баланс: " + ChatColor.GREEN + economy.getBalance(playerList.get(i)));
+            skull.setLore(lore);
+            head.setItemMeta(skull);
 
-            meta.setLore(lore);
-            playerHead.setItemMeta(meta);
-
-            PlayerListInv.addItem(playerHead);
+            PlayerListInv.addItem(head);
         }
         pl.openInventory(PlayerListInv);
     }
+
 
     public static void selectedPlayerPanel(Player pl, Player selectedPl){
         Inventory controlPlayerMenu = Bukkit.createInventory(pl, 18, ChatColor.GREEN + "Управление игроком");
