@@ -28,7 +28,7 @@ public class utils {
         String name = pl.getName();
         UUID uuid = pl.getUniqueId();
         OfflinePlayer offlinePlayer = pl.getServer().getOfflinePlayer(uuid);
-        System.out.println(uuid);
+
         Inventory PlayerListInv = Bukkit.createInventory(pl, 54, ChatColor.GREEN + "Список игроков");
 
 
