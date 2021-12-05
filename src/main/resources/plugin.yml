@@ -1,0 +1,10 @@
+name: AdminPanel
+version: '${project.version}'
+main: me.chebyrek.adminpanel.AdminPanel
+api-version: 1.17
+depend: [ Vault ]
+authors: [ 4ebyrek ]
+description: Панель управления для администрации
+commands:
+  menu:
+    description: Открывает панель уравления
