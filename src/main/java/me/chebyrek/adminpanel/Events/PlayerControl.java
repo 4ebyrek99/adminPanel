@@ -1,5 +1,6 @@
 package me.chebyrek.adminpanel.Events;
 
+import me.chebyrek.adminpanel.Colors.Colors;
 import me.chebyrek.adminpanel.utils.utils;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -30,7 +31,7 @@ public class PlayerControl implements Listener {
 
     @EventHandler
     public void actionPl(InventoryClickEvent e){
-        if(e.getView().getTitle().equalsIgnoreCase(ChatColor.GREEN + "Управление игроком")){
+        if(e.getView().getTitle().equalsIgnoreCase(Colors.CGreen() + "Управление игроком")){
             e.setCancelled(true);
             if (e.getCurrentItem() != null) {
 
@@ -51,7 +52,7 @@ public class PlayerControl implements Listener {
                     case SKELETON_SKULL: {
                         Player selected = pl.getServer().getPlayer(selectedName);
                         selected.setHealth(0);
-                        selected.sendMessage(ChatColor.RED + "Вы были убиты Администратором!");
+                        selected.sendMessage(Colors.CRed() + "Вы были убиты Администратором!");
                         break;
                     }
                     case COMPASS: {

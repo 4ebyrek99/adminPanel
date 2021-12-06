@@ -1,5 +1,6 @@
 package me.chebyrek.adminpanel.Commands;
 
+import me.chebyrek.adminpanel.Colors.Colors;
 import me.chebyrek.adminpanel.utils.utils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -28,7 +29,7 @@ public class openMenu implements CommandExecutor {
                 }
                 else{
 
-                    Inventory inv = Bukkit.createInventory(pl, 9, ChatColor.GREEN + "Админ панель");
+                    Inventory inv = Bukkit.createInventory(pl, 9, Colors.CGreen() + "Админ панель");
 
                     ItemStack PlayerList = new ItemStack(Material.PLAYER_HEAD);
                     ItemMeta PlayerListMeta = PlayerList.getItemMeta();
@@ -47,11 +48,11 @@ public class openMenu implements CommandExecutor {
                 }
             }
             else{
-                pl.sendMessage(ChatColor.RED + "У вас недостаточно прав для выполнения данной команды.");
+                pl.sendMessage(Colors.CRed() + "У вас недостаточно прав для выполнения данной команды.");
             }
         }
         else{
-            System.out.println(ChatColor.RED + "Эта команда должна выполнятся игроком!");
+            System.out.println(Colors.CRed() + "Эта команда должна выполнятся игроком!");
         }
 
         return true;

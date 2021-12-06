@@ -1,7 +1,7 @@
 package me.chebyrek.adminpanel.Events;
 
+import me.chebyrek.adminpanel.Colors.Colors;
 import me.chebyrek.adminpanel.utils.utils;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -15,7 +15,7 @@ public class invClick implements Listener {
     @EventHandler
     public void MainClickEvent(InventoryClickEvent e) {
 
-        if (e.getView().getTitle().equalsIgnoreCase(ChatColor.GREEN + "Админ панель")) {
+        if (e.getView().getTitle().equalsIgnoreCase(Colors.CGreen()+ "Админ панель")) {
             e.setCancelled(true);
             if(e.getCurrentItem() != null) {
                 switch (e.getCurrentItem().getType()) {
