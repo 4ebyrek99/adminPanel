@@ -8,3 +8,5 @@ description: Панель управления для администрации
 commands:
   menu:
     description: Открывает панель уравления
+  adminpanel:
+    description: Перезагружает файл настроек

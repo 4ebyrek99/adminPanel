@@ -82,6 +82,12 @@ public class utils {
         tpToSpawn.setItemMeta(tpToSpawnMeta);
         controlPlayerMenu.setItem(4, tpToSpawn);
 
+        ItemStack Kill = new ItemStack(Material.SKELETON_SKULL);
+        ItemMeta KillMeta = Kill.getItemMeta();
+        KillMeta.setDisplayName(Colors.CWhite() +"Убить игрока");
+        Kill.setItemMeta(KillMeta);
+        controlPlayerMenu.setItem(5, Kill);
+
         ItemStack backBtn = new ItemStack(Material.BARRIER);
         ItemMeta backBtnMeta = backBtn.getItemMeta();
         backBtnMeta.setDisplayName(Colors.CRed() +"Назад");
