@@ -1,7 +1,7 @@
 package me.chebyrek.adminpanel.utils;
 
-import jdk.tools.jlink.plugin.Plugin;
 import me.chebyrek.adminpanel.AdminPanel;
+import me.chebyrek.adminpanel.Colors.Colors;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -22,37 +22,41 @@ public class utils {
     public static void openPlayerList(Player pl){
         pl.closeInventory();
 
-        String name = pl.getName();
-        UUID uuid = pl.getUniqueId();
-        OfflinePlayer offlinePlayer = pl.getServer().getOfflinePlayer(uuid);
-
         Inventory PlayerListInv = Bukkit.createInventory(pl, 54, ChatColor.GREEN + "Список игроков");
 
         ArrayList<Player> playerList = new ArrayList<>(pl.getServer().getOnlinePlayers());
 
         for(int i = 0; i < playerList.size(); i++) {
 
-            ItemStack head = new ItemStack(Material.PLAYER_HEAD, 1);
-            SkullMeta skull = (SkullMeta) head.getItemMeta();
-
-            skull.setOwningPlayer(offlinePlayer);
-            skull.setDisplayName(offlinePlayer.getName());
-            ArrayList<String> lore = new ArrayList<>();
-            lore.add("Здоровье: " + ChatColor.GREEN + Math.round(playerList.get(i).getHealth()));
-            lore.add("Уровень: " + ChatColor.GREEN + Math.round(playerList.get(i).getLevel()));
-            lore.add("Баланс: " + ChatColor.GREEN + economy.getBalance(playerList.get(i)));
-            lore.add("Пинг: " + ChatColor.GREEN + playerList.get(i).getPing());
-            skull.setLore(lore);
-            head.setItemMeta(skull);
-
-            PlayerListInv.addItem(head);
+            PlayerListInv.addItem(getHead(playerList.get(i)));
         }
         pl.openInventory(PlayerListInv);
     }
 
+    public static ItemStack getHead(Player pl){
+
+        UUID uuid = pl.getUniqueId();
+        OfflinePlayer offlinePlayer = pl.getServer().getOfflinePlayer(uuid);
+        String name = offlinePlayer.getName();
+
+        ItemStack head = new ItemStack(Material.PLAYER_HEAD, 1);
+        SkullMeta skull = (SkullMeta) head.getItemMeta();
+
+        skull.setOwningPlayer(offlinePlayer);
+        skull.setDisplayName(name);
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("Здоровье: " + Colors.CGreen() + Math.round(pl.getHealth()));
+        lore.add("Уровень: " + Colors.CGreen() + Math.round(pl.getLevel()));
+        lore.add("Баланс: " + Colors.CGreen() + economy.getBalance(pl));
+        lore.add("Пинг: " + Colors.CGreen() + pl.getPing());
+        skull.setLore(lore);
+        head.setItemMeta(skull);
+
+        return head;
+    }
 
     public static void selectedPlayerPanel(Player pl, Player selectedPl){
-        Inventory controlPlayerMenu = Bukkit.createInventory(pl, 18, ChatColor.GREEN + "Управление игроком");
+        Inventory controlPlayerMenu = Bukkit.createInventory(pl, 18, Colors.CGreen() + "Управление игроком");
 
         ItemStack playerName = new ItemStack(Material.PLAYER_HEAD);
         ItemMeta playerNameMeta = playerName.getItemMeta();
