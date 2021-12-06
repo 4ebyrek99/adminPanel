@@ -1,6 +1,7 @@
 package me.chebyrek.adminpanel.utils;
 
 import me.chebyrek.adminpanel.AdminPanel;
+import me.chebyrek.adminpanel.Buttons.Buttons;
 import me.chebyrek.adminpanel.Colors.Colors;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
@@ -30,6 +31,7 @@ public class utils {
 
             PlayerListInv.addItem(getHead(playerList.get(i), true));
         }
+        PlayerListInv.setItem(45, Buttons.backBtn());
         pl.openInventory(PlayerListInv);
     }
 
@@ -88,11 +90,7 @@ public class utils {
         Kill.setItemMeta(KillMeta);
         controlPlayerMenu.setItem(5, Kill);
 
-        ItemStack backBtn = new ItemStack(Material.BARRIER);
-        ItemMeta backBtnMeta = backBtn.getItemMeta();
-        backBtnMeta.setDisplayName(Colors.CRed() +"Назад");
-        backBtn.setItemMeta(backBtnMeta);
-        controlPlayerMenu.setItem(8, backBtn);
+        controlPlayerMenu.setItem(8, Buttons.backBtn());
 
         pl.closeInventory();
 

@@ -36,23 +36,22 @@ public class PlayerControl implements Listener {
             if (e.getCurrentItem() != null) {
 
                 Player pl = (Player) e.getWhoClicked();
+                String plName = ChatColor.stripColor(pl.getDisplayName());
                 String selectedName = ChatColor.stripColor(e.getClickedInventory().getItem(0).getItemMeta().getDisplayName());
+                Player selected = pl.getServer().getPlayer(selectedName);
 
                 switch (e.getCurrentItem().getType()) {
                     case ENDER_EYE:{
-                        String plName = ChatColor.stripColor(pl.getDisplayName());
                         pl.performCommand("tp " + plName + " " + selectedName);
                         break;
                     }
                     case ENDER_PEARL:{
-                        String plName = ChatColor.stripColor(pl.getDisplayName());
                         pl.performCommand("tp " + selectedName + " " + plName);
                         break;
                     }
                     case SKELETON_SKULL: {
-                        Player selected = pl.getServer().getPlayer(selectedName);
                         selected.setHealth(0);
-                        selected.sendMessage(Colors.CRed() + "Вы были убиты Администратором!");
+                        selected.sendMessage(Colors.CRed() + "Вы были убиты " + plName + "!");
                         break;
                     }
                     case COMPASS: {
