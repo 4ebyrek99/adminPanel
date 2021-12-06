@@ -13,7 +13,7 @@ public class PlayerControl implements Listener {
 
     @EventHandler
     public void onClickMenu(InventoryClickEvent e){
-        if (e.getView().getTitle().equalsIgnoreCase(ChatColor.GREEN + "Список игроков")) {
+        if (e.getView().getTitle().equalsIgnoreCase("Список игроков")) {
             e.setCancelled(true);
             if(e.getCurrentItem() != null) {
                 Player pl = (Player) e.getWhoClicked();
@@ -24,6 +24,10 @@ public class PlayerControl implements Listener {
                         utils.selectedPlayerPanel(pl, selectedPl);
                         break;
                     }
+                    case BARRIER:{
+                        pl.closeInventory();
+                        utils.openAdminPanel(pl);
+                    }
                 }
             }
         }
@@ -31,7 +35,7 @@ public class PlayerControl implements Listener {
 
     @EventHandler
     public void actionPl(InventoryClickEvent e){
-        if(e.getView().getTitle().equalsIgnoreCase(Colors.CGreen() + "Управление игроком")){
+        if(e.getView().getTitle().equalsIgnoreCase("Управление игроком")){
             e.setCancelled(true);
             if (e.getCurrentItem() != null) {
 

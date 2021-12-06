@@ -27,23 +27,7 @@ public class openMenu implements CommandExecutor {
                     utils.selectedPlayerPanel(pl, selected);
                 }
                 else{
-
-                    Inventory inv = Bukkit.createInventory(pl, 9, Colors.CGreen() + "Админ панель");
-
-                    ItemStack PlayerList = new ItemStack(Material.PLAYER_HEAD);
-                    ItemMeta PlayerListMeta = PlayerList.getItemMeta();
-                    PlayerListMeta.setDisplayName(Colors.CWhite() + "Список игроков");
-                    PlayerList.setItemMeta(PlayerListMeta);
-
-                    ItemStack TpToSpawn = new ItemStack(Material.COMPASS);
-                    ItemMeta TpToSpawnMeta = TpToSpawn.getItemMeta();
-                    TpToSpawnMeta.setDisplayName(Colors.CWhite() +"Телепорт на спавн");
-                    TpToSpawn.setItemMeta(TpToSpawnMeta);
-
-                    ItemStack[] menu_items = {PlayerList, TpToSpawn};
-                    inv.setContents(menu_items);
-
-                    pl.openInventory(inv);
+                    utils.openAdminPanel(pl);
                 }
             }
             else{
@@ -51,7 +35,7 @@ public class openMenu implements CommandExecutor {
             }
         }
         else{
-            System.out.println(Colors.CRed() + "Эта команда должна выполнятся игроком!");
+            Bukkit.getLogger().info(Colors.CRed() + "Эта команда должна выполнятся игроком!");
         }
 
         return true;

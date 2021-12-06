@@ -15,7 +15,7 @@ public class invClick implements Listener {
     @EventHandler
     public void MainClickEvent(InventoryClickEvent e) {
 
-        if (e.getView().getTitle().equalsIgnoreCase(Colors.CGreen()+ "Админ панель")) {
+        if (e.getView().getTitle().equalsIgnoreCase("Админ панель")) {
             e.setCancelled(true);
             if(e.getCurrentItem() != null) {
                 switch (e.getCurrentItem().getType()) {

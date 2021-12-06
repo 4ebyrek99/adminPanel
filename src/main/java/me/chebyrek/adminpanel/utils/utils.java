@@ -23,7 +23,7 @@ public class utils {
     public static void openPlayerList(Player pl){
         pl.closeInventory();
 
-        Inventory PlayerListInv = Bukkit.createInventory(pl, 54, ChatColor.GREEN + "Список игроков");
+        Inventory PlayerListInv = Bukkit.createInventory(pl, 54, "Список игроков");
 
         ArrayList<Player> playerList = new ArrayList<>(pl.getServer().getOnlinePlayers());
 
@@ -33,6 +33,25 @@ public class utils {
         }
         PlayerListInv.setItem(45, Buttons.backBtn());
         pl.openInventory(PlayerListInv);
+    }
+
+    public static void openAdminPanel(Player pl){
+        Inventory inv = Bukkit.createInventory(pl, 9, "Админ панель");
+
+        ItemStack PlayerList = new ItemStack(Material.PLAYER_HEAD);
+        ItemMeta PlayerListMeta = PlayerList.getItemMeta();
+        PlayerListMeta.setDisplayName(Colors.CWhite() + "Список игроков");
+        PlayerList.setItemMeta(PlayerListMeta);
+
+        ItemStack TpToSpawn = new ItemStack(Material.COMPASS);
+        ItemMeta TpToSpawnMeta = TpToSpawn.getItemMeta();
+        TpToSpawnMeta.setDisplayName(Colors.CWhite() +"Телепорт на спавн");
+        TpToSpawn.setItemMeta(TpToSpawnMeta);
+
+        ItemStack[] menu_items = {PlayerList, TpToSpawn};
+        inv.setContents(menu_items);
+
+        pl.openInventory(inv);
     }
 
     public static ItemStack getHead(Player pl, Boolean setLore){
@@ -61,7 +80,7 @@ public class utils {
     }
 
     public static void selectedPlayerPanel(Player pl, Player selectedPl){
-        Inventory controlPlayerMenu = Bukkit.createInventory(pl, 18, Colors.CGreen() + "Управление игроком");
+        Inventory controlPlayerMenu = Bukkit.createInventory(pl, 18,"Управление игроком");
 
 
         controlPlayerMenu.setItem(0, utils.getHead(selectedPl, true));
