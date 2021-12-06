@@ -9,6 +9,7 @@ public class Colors {
     private static final ChatColor darkRed = ChatColor.DARK_RED;
     private static final ChatColor darkBlue = ChatColor.DARK_BLUE;
     private static final ChatColor blue = ChatColor.BLUE;
+    private static final ChatColor white = ChatColor.WHITE;
 
     public static ChatColor CRed(){
         return red;
@@ -26,5 +27,6 @@ public class Colors {
         return darkBlue;
     }
     public static ChatColor CBlue(){ return blue;}
+    public static ChatColor CWhite(){ return white;}
 
 }

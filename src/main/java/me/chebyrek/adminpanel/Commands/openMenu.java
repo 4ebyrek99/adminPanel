@@ -33,12 +33,12 @@ public class openMenu implements CommandExecutor {
 
                     ItemStack PlayerList = new ItemStack(Material.PLAYER_HEAD);
                     ItemMeta PlayerListMeta = PlayerList.getItemMeta();
-                    PlayerListMeta.setDisplayName("Список игроков");
+                    PlayerListMeta.setDisplayName(Colors.CWhite() + "Список игроков");
                     PlayerList.setItemMeta(PlayerListMeta);
 
                     ItemStack TpToSpawn = new ItemStack(Material.COMPASS);
                     ItemMeta TpToSpawnMeta = TpToSpawn.getItemMeta();
-                    TpToSpawnMeta.setDisplayName("Телепорт на спавн");
+                    TpToSpawnMeta.setDisplayName(Colors.CWhite() +"Телепорт на спавн");
                     TpToSpawn.setItemMeta(TpToSpawnMeta);
 
                     ItemStack[] menu_items = {PlayerList, TpToSpawn};

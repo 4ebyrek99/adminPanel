@@ -28,12 +28,12 @@ public class utils {
 
         for(int i = 0; i < playerList.size(); i++) {
 
-            PlayerListInv.addItem(getHead(playerList.get(i)));
+            PlayerListInv.addItem(getHead(playerList.get(i), true));
         }
         pl.openInventory(PlayerListInv);
     }
 
-    public static ItemStack getHead(Player pl){
+    public static ItemStack getHead(Player pl, Boolean setLore){
 
         UUID uuid = pl.getUniqueId();
         OfflinePlayer offlinePlayer = pl.getServer().getOfflinePlayer(uuid);
@@ -43,13 +43,16 @@ public class utils {
         SkullMeta skull = (SkullMeta) head.getItemMeta();
 
         skull.setOwningPlayer(offlinePlayer);
-        skull.setDisplayName(name);
-        ArrayList<String> lore = new ArrayList<>();
-        lore.add("Здоровье: " + Colors.CGreen() + Math.round(pl.getHealth()));
-        lore.add("Уровень: " + Colors.CGreen() + Math.round(pl.getLevel()));
-        lore.add("Баланс: " + Colors.CGreen() + economy.getBalance(pl));
-        lore.add("Пинг: " + Colors.CGreen() + pl.getPing());
-        skull.setLore(lore);
+        skull.setDisplayName(Colors.CWhite() + name);
+        if(setLore){
+            ArrayList<String> lore = new ArrayList<>();
+            lore.add("Здоровье: " + Colors.CGreen() + Math.round(pl.getHealth()));
+            lore.add("Уровень: " + Colors.CGreen() + Math.round(pl.getLevel()));
+            lore.add("Баланс: " + Colors.CGreen() + economy.getBalance(pl));
+            lore.add("Пинг: " + Colors.CGreen() + pl.getPing());
+            skull.setLore(lore);
+        }
+
         head.setItemMeta(skull);
 
         return head;
@@ -58,33 +61,30 @@ public class utils {
     public static void selectedPlayerPanel(Player pl, Player selectedPl){
         Inventory controlPlayerMenu = Bukkit.createInventory(pl, 18, Colors.CGreen() + "Управление игроком");
 
-        ItemStack playerName = new ItemStack(Material.PLAYER_HEAD);
-        ItemMeta playerNameMeta = playerName.getItemMeta();
-        playerNameMeta.setDisplayName(selectedPl.getDisplayName());
-        playerName.setItemMeta(playerNameMeta);
-        controlPlayerMenu.setItem(0, playerName);
+
+        controlPlayerMenu.setItem(0, utils.getHead(selectedPl, true));
 
         ItemStack tpToPlayer = new ItemStack(Material.ENDER_EYE);
         ItemMeta tpToPlayerMeta = tpToPlayer.getItemMeta();
-        tpToPlayerMeta.setDisplayName("Телепорт к игроку");
+        tpToPlayerMeta.setDisplayName(Colors.CWhite() +"Телепорт к игроку");
         tpToPlayer.setItemMeta(tpToPlayerMeta);
         controlPlayerMenu.setItem(2, tpToPlayer);
 
         ItemStack tpToAdmin = new ItemStack(Material.ENDER_PEARL);
         ItemMeta tpToAdminMeta = tpToAdmin.getItemMeta();
-        tpToAdminMeta.setDisplayName("Телепорт к себе");
+        tpToAdminMeta.setDisplayName(Colors.CWhite() +"Телепорт к себе");
         tpToAdmin.setItemMeta(tpToAdminMeta);
         controlPlayerMenu.setItem(3, tpToAdmin);
 
         ItemStack tpToSpawn = new ItemStack(Material.COMPASS);
         ItemMeta tpToSpawnMeta = tpToSpawn.getItemMeta();
-        tpToSpawnMeta.setDisplayName("Телепорт на спавн");
+        tpToSpawnMeta.setDisplayName(Colors.CWhite() +"Телепорт на спавн");
         tpToSpawn.setItemMeta(tpToSpawnMeta);
         controlPlayerMenu.setItem(4, tpToSpawn);
 
         ItemStack backBtn = new ItemStack(Material.BARRIER);
         ItemMeta backBtnMeta = backBtn.getItemMeta();
-        backBtnMeta.setDisplayName("Назад");
+        backBtnMeta.setDisplayName(Colors.CRed() +"Назад");
         backBtn.setItemMeta(backBtnMeta);
         controlPlayerMenu.setItem(8, backBtn);
 
