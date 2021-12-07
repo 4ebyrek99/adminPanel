@@ -5,7 +5,6 @@ import me.chebyrek.adminpanel.Buttons.Buttons;
 import me.chebyrek.adminpanel.Colors.Colors;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
@@ -20,20 +19,41 @@ import java.util.UUID;
 public class utils {
     public static Economy economy = AdminPanel.getEconomy();
 
-    public static void openPlayerList(Player pl){
-        pl.closeInventory();
+    public static void openPlayerList(Player pl, int pageIndex){
 
         Inventory PlayerListInv = Bukkit.createInventory(pl, 54, "Список игроков");
 
         ArrayList<Player> playerList = new ArrayList<>(pl.getServer().getOnlinePlayers());
+        ArrayList<ItemStack> heads = new ArrayList<>();
+
+
+        int index;
+
+
+        PlayerListInv.setItem(45, Buttons.page(pageIndex));
+        PlayerListInv.setItem(48, Buttons.leftBtn());
+        PlayerListInv.setItem(49, Buttons.backBtn());
+        PlayerListInv.setItem(50, Buttons.rightBtn());
 
         for(int i = 0; i < playerList.size(); i++) {
-
-            PlayerListInv.addItem(getHead(playerList.get(i), true));
+            heads.add(getHead(playerList.get(i), true));
         }
-        PlayerListInv.setItem(45, Buttons.backBtn());
+
+
+        for(int i = 0; i < PlayerListInv.getSize()-9; i++){
+            index = 45 * pageIndex + i;
+            if(index >= heads.size()){
+                break;
+            }
+            if (heads.get(index) != null){
+                PlayerListInv.addItem(heads.get(index));
+            }
+        }
+
         pl.openInventory(PlayerListInv);
     }
+
+
 
     public static void openAdminPanel(Player pl){
         Inventory inv = Bukkit.createInventory(pl, 9, "Админ панель");
@@ -81,7 +101,6 @@ public class utils {
 
     public static void selectedPlayerPanel(Player pl, Player selectedPl){
         Inventory controlPlayerMenu = Bukkit.createInventory(pl, 18,"Управление игроком");
-
 
         controlPlayerMenu.setItem(0, utils.getHead(selectedPl, true));
 

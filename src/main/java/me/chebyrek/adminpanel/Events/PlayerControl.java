@@ -14,22 +14,37 @@ public class PlayerControl implements Listener {
     @EventHandler
     public void onClickMenu(InventoryClickEvent e){
         if (e.getView().getTitle().equalsIgnoreCase("Список игроков")) {
-            e.setCancelled(true);
             if(e.getCurrentItem() != null) {
                 Player pl = (Player) e.getWhoClicked();
-
+                int pageIndex = Integer.parseInt(ChatColor.stripColor(e.getClickedInventory().getItem(45).getItemMeta().getDisplayName()));
                 switch (e.getCurrentItem().getType()){
                     case PLAYER_HEAD:{
                         Player selectedPl = pl.getServer().getPlayerExact(ChatColor.stripColor((e.getCurrentItem().getItemMeta().getDisplayName())));
                         utils.selectedPlayerPanel(pl, selectedPl);
                         break;
                     }
-                    case BARRIER:{
+                    case BARRIER: {
                         pl.closeInventory();
                         utils.openAdminPanel(pl);
+                        break;
+                    }
+                    case STONE_BUTTON:{//Назад
+                        if((pageIndex-1) < 0){
+                            pl.sendMessage(Colors.CRed() + "Вы уже на первой странице!");
+                            break;
+                        }
+                        else{
+                            utils.openPlayerList(pl, pageIndex-1);
+                        }
+                        break;
+                    }
+                    case OAK_BUTTON:{
+                        utils.openPlayerList(pl, pageIndex+1);
+                        break;
                     }
                 }
             }
+            e.setCancelled(true);
         }
     }
 
@@ -63,7 +78,7 @@ public class PlayerControl implements Listener {
                         break;
                     }
                     case BARRIER:{
-                        utils.openPlayerList(pl);
+                        utils.openPlayerList(pl, 0);
                     }
                 }
             }

@@ -86,12 +86,12 @@ public final class AdminPanel extends JavaPlugin implements Listener {
             if (args.length > 0) {
                 if(args[0].equalsIgnoreCase("reload")){
                     this.reloadConfig();
-                    getLogger().info(Colors.CGreen() + "Файл найстроек adminPanel успешно перезагружен.");
+                    Bukkit.getLogger().info(Colors.CGreen() + "Файл найстроек adminPanel успешно перезагружен.");
                 }
             }
             else
             {
-                getLogger().info(Colors.CRed() + "Используйте: " + Colors.CGreen() + "/adminpanel reload");
+                Bukkit.getLogger().info(Colors.CRed() + "Используйте: " + Colors.CGreen() + "/adminpanel reload");
             }
         }
         return true;

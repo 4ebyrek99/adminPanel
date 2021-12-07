@@ -1,6 +1,6 @@
 package me.chebyrek.adminpanel.Events;
 
-import me.chebyrek.adminpanel.Colors.Colors;
+
 import me.chebyrek.adminpanel.utils.utils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -21,7 +21,7 @@ public class invClick implements Listener {
                 switch (e.getCurrentItem().getType()) {
                     case PLAYER_HEAD: {
                         Player pl = (Player) e.getWhoClicked();
-                        utils.openPlayerList(pl);
+                        utils.openPlayerList(pl, 0);
                         break;
                     }
                     case COMPASS: {

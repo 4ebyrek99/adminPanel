@@ -17,4 +17,28 @@ public class Buttons {
         return backBtn;
     }
 
+    public static final ItemStack leftBtn(){
+        ItemStack leftBtn = new ItemStack(Material.STONE_BUTTON);
+        ItemMeta leftBtnMeta = leftBtn.getItemMeta();
+        leftBtnMeta.setDisplayName(Colors.CGreen() +"<--");
+        leftBtn.setItemMeta(leftBtnMeta);
+        return leftBtn;
+    }
+
+    public static final ItemStack rightBtn(){
+        ItemStack rightBtn = new ItemStack(Material.OAK_BUTTON);
+        ItemMeta rightBtnBtnMeta = rightBtn.getItemMeta();
+        rightBtnBtnMeta.setDisplayName(Colors.CGreen() +"-->");
+        rightBtn.setItemMeta(rightBtnBtnMeta);
+        return rightBtn;
+    }
+
+    public static final ItemStack page(int pageIndex){
+        ItemStack page = new ItemStack(Material.PAPER);
+        ItemMeta pageMeta = page.getItemMeta();
+        pageMeta.setDisplayName(Colors.CGreen() + "" + pageIndex);
+        page.setItemMeta(pageMeta);
+        return page;
+    }
+
 }
