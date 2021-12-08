@@ -27,7 +27,7 @@ public class utils {
         ArrayList<ItemStack> heads = new ArrayList<>();
 
 
-        int index;
+        int index = 45 * pageIndex;
 
 
         PlayerListInv.setItem(45, Buttons.page(pageIndex));
@@ -39,18 +39,21 @@ public class utils {
             heads.add(getHead(playerList.get(i), true));
         }
 
-
-        for(int i = 0; i < PlayerListInv.getSize()-9; i++){
-            index = 45 * pageIndex + i;
-            if(index >= heads.size()){
-                break;
+        if(!((index) >= heads.size())) {
+            for(int i = 0; i < PlayerListInv.getSize()-9; i++){
+                index += i;
+                if(index >= heads.size()){
+                    break;
+                }
+                if (heads.get(index) != null){
+                    PlayerListInv.addItem(heads.get(index));
+                }
             }
-            if (heads.get(index) != null){
-                PlayerListInv.addItem(heads.get(index));
-            }
+            pl.openInventory(PlayerListInv);
         }
-
-        pl.openInventory(PlayerListInv);
+        else{
+            pl.sendMessage(Colors.CRed() + "Вы уже на последней странице!");
+        }
     }
 
 
