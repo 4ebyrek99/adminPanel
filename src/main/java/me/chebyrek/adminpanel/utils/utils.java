@@ -30,7 +30,7 @@ public class utils {
         int index = 45 * pageIndex;
 
 
-        PlayerListInv.setItem(45, Buttons.page(pageIndex));
+        PlayerListInv.setItem(45, Buttons.page(pageIndex+1));
         PlayerListInv.setItem(48, Buttons.leftBtn());
         PlayerListInv.setItem(49, Buttons.backBtn());
         PlayerListInv.setItem(50, Buttons.rightBtn());
@@ -130,6 +130,12 @@ public class utils {
         KillMeta.setDisplayName(Colors.CWhite() +"Убить игрока");
         Kill.setItemMeta(KillMeta);
         controlPlayerMenu.setItem(5, Kill);
+
+        ItemStack OpenInventory = new ItemStack(Material.CHEST);
+        ItemMeta OpenInventoryBtnMeta = OpenInventory.getItemMeta();
+        OpenInventoryBtnMeta.setDisplayName(Colors.CGreen() +"Открыть инвентарь игрока");
+        OpenInventory.setItemMeta(OpenInventoryBtnMeta);
+        controlPlayerMenu.setItem(6, OpenInventory);
 
         controlPlayerMenu.setItem(8, Buttons.backBtn());
 

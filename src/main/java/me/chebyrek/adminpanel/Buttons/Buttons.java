@@ -27,9 +27,9 @@ public class Buttons {
 
     public static final ItemStack rightBtn(){
         ItemStack rightBtn = new ItemStack(Material.OAK_BUTTON);
-        ItemMeta rightBtnBtnMeta = rightBtn.getItemMeta();
-        rightBtnBtnMeta.setDisplayName(Colors.CGreen() +"-->");
-        rightBtn.setItemMeta(rightBtnBtnMeta);
+        ItemMeta rightBtnMeta = rightBtn.getItemMeta();
+        rightBtnMeta.setDisplayName(Colors.CGreen() +"-->");
+        rightBtn.setItemMeta(rightBtnMeta);
         return rightBtn;
     }
 
@@ -40,5 +40,6 @@ public class Buttons {
         page.setItemMeta(pageMeta);
         return page;
     }
+
 
 }

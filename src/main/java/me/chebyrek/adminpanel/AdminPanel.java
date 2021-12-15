@@ -8,21 +8,30 @@ import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
+import java.io.IOException;
+
 public final class AdminPanel extends JavaPlugin implements Listener {
 
     private static Economy econ = null;
 
-    FileConfiguration config = cfg();
+    private File customConfigFile;
+    private FileConfiguration customConfig;
+
+    public static AdminPanel plugin;
 
     @Override
     public void onEnable() {
-        this.saveDefaultConfig();
+        createCustomConfig();
+        plugin = this;
 
         if (!setupEconomy() ) {
             getServer().getPluginManager().disablePlugin(this);
@@ -36,7 +45,7 @@ public final class AdminPanel extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new PlayerControl(), this);
 
         Bukkit.getLogger().info("Плагин \"Админ панель\" запущен!");
-        Bukkit.getLogger().info("Файл настроек загружен : " + getConfig().getString("config-ver"));
+        Bukkit.getLogger().info("Файл настроек загружен : " + getCustomConfig().getString("config-ver"));
     }
 
     private boolean setupEconomy() {
@@ -55,10 +64,25 @@ public final class AdminPanel extends JavaPlugin implements Listener {
         return econ;
     }
 
-    public FileConfiguration cfg(){
-        return config;
+
+    public FileConfiguration getCustomConfig() {
+        return this.customConfig;
     }
 
+    private void createCustomConfig() {
+        customConfigFile = new File(getDataFolder(), "custom.yml");
+        if (!customConfigFile.exists()) {
+            customConfigFile.getParentFile().mkdirs();
+            saveResource("custom.yml", false);
+        }
+
+        customConfig = new YamlConfiguration();
+        try {
+            customConfig.load(customConfigFile);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+    }
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String str, String args[]){
 
@@ -67,7 +91,15 @@ public final class AdminPanel extends JavaPlugin implements Listener {
             if (pl.hasPermission("adminPanel.reload")) {
                 if (args.length > 0) {
                     if(args[0].equalsIgnoreCase("reload")){
-                        this.reloadConfig();
+
+                        customConfigFile = new File(getDataFolder(), "custom.yml");
+                        customConfig = new YamlConfiguration();
+                        try {
+                            customConfig.load(customConfigFile);
+                        } catch (IOException | InvalidConfigurationException e) {
+                            e.printStackTrace();
+                        }
+                        pl.sendMessage("Версия файла настроек:" + getCustomConfig().getString("config-ver"));
                         pl.sendMessage(Colors.CGreen() + "Файл найстроек adminPanel успешно перезагружен.");
                     }
                 }
@@ -79,19 +111,6 @@ public final class AdminPanel extends JavaPlugin implements Listener {
             else
             {
                 pl.sendMessage(Colors.CRed() + "У вас недостаточно прав для выполнения данной команды.");
-            }
-        }
-        else
-        {
-            if (args.length > 0) {
-                if(args[0].equalsIgnoreCase("reload")){
-                    this.reloadConfig();
-                    Bukkit.getLogger().info(Colors.CGreen() + "Файл найстроек adminPanel успешно перезагружен.");
-                }
-            }
-            else
-            {
-                Bukkit.getLogger().info(Colors.CRed() + "Используйте: " + Colors.CGreen() + "/adminpanel reload");
             }
         }
         return true;
